@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+    <h4> your username and password didn't match. please try again</h4>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h2 style="padding: 10px;">welcome {{user.username}}</h2>
+{% else %}
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+{% endif %}
+
+{% endblock %}
